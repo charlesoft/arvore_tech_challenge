@@ -22,6 +22,10 @@ defmodule ArvoreTechChallenge.Entities do
     |> Repo.one()
   end
 
+  def get_entity!(id) do
+    Repo.get!(Entity, id)
+  end
+
   defp select_entities_ids do
     from ce in Entity, select: ce.id
   end
