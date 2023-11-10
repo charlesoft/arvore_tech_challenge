@@ -43,4 +43,8 @@ defmodule ArvoreTechChallenge.Entities do
     |> Entity.changeset(attrs)
     |> Repo.update()
   end
+
+  def delete_entity(entity) do
+    Repo.delete(entity)
+  end
 end
