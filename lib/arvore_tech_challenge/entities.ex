@@ -15,15 +15,15 @@ defmodule ArvoreTechChallenge.Entities do
     |> Repo.all()
   end
 
-  def get_entity(id) do
+  def get_entity_and_its_children(id) do
     Entity
     |> where([e], e.id == ^id)
     |> preload(^[entities: select_entities_ids()])
     |> Repo.one()
   end
 
-  def get_entity!(id) do
-    Repo.get!(Entity, id)
+  def get_entity(id) do
+    Repo.get(Entity, id)
   end
 
   defp select_entities_ids do
