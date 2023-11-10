@@ -14,10 +14,14 @@ defmodule ArvoreTechChallengeWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", ArvoreTechChallengeWeb do
-    pipe_through :browser
+  scope "/" do
+    pipe_through :api
 
-    get "/", PageController, :index
+    forward "/api/v2/partners/entities", Absinthe.Plug, schema: ArvoreTechChallengeWeb.Schema
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+      schema: ArvoreTechChallengeWeb.Schema,
+      interface: :simple
   end
 
   # Other scopes may use custom stacks.

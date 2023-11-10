@@ -1,4 +1,5 @@
-alias ArvoreTechChallenge.{Entity, Repo}
+alias ArvoreTechChallenge.Entities.Entity
+alias ArvoreTechChallenge.Repo
 
 school_one =
   %Entity{
