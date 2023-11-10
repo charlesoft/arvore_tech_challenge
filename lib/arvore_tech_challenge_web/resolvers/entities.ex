@@ -11,46 +11,68 @@ defmodule ArvoreTechChallengeWeb.Resolvers.Entities do
   end
 
   def get_entity(_parent, %{id: id}, _resolution) do
-    {:ok, Entities.get_entity(id)}
+    {:ok, Entities.get_entity_and_its_children(id)}
   end
 
   def create_entity(_parent, args, _resolution) do
     case Entities.create_entity(args) do
       {:ok, entity} ->
-        entity = Entities.get_entity(entity.id)
+        entity = Entities.get_entity_and_its_children(entity.id)
 
         {:ok, entity}
 
       {:error, error} ->
-        messages = error_messages(error)
-
-        {:error, %{message: messages}}
+        changeset_error_messages(error)
     end
   end
 
   def update_entity(_parent, %{id: id} = args, _resolution) do
-    with {:ok, %Entity{} = entity} <- {:ok, Entities.get_entity!(id)} do
+    with {:ok, %Entity{} = entity} <- {:ok, find_entity(id)} do
       case Entities.update_entity(entity, args) do
         {:ok, entity} ->
-          entity = Entities.get_entity(entity.id)
+          entity = Entities.get_entity_and_its_children(entity.id)
 
           {:ok, entity}
 
         {:error, error} ->
-          messages = error_messages(error)
-
-          {:error, %{message: messages}}
+          changeset_error_messages(error)
       end
     else
       _ ->
-        {:error, message: "Entity Not Found"}
+        not_found_error()
     end
   end
 
-  defp error_messages(error) do
-    Enum.map(error.errors, fn error ->
-      {value, {message, _validation}} = error
-      "#{value} #{message}"
-    end)
+  def delete_entity(_parent, %{id: id}, _resolution) do
+    with {:ok, %Entity{} = entity} <- {:ok, find_entity(id)} do
+      case Entities.delete_entity(entity) do
+        {:ok, _entity} ->
+          {:ok, %{message: "Entity and its children deleted with success."}}
+
+        {:error, error} ->
+          changeset_error_messages(error)
+      end
+    else
+      _ ->
+        not_found_error()
+    end
+  end
+
+  defp find_entity(id) do
+    Entities.get_entity(id)
+  end
+
+  defp changeset_error_messages(error) do
+    messages =
+      Enum.map(error.errors, fn error ->
+        {value, {message, _validation}} = error
+        "#{value} #{message}"
+      end)
+
+    {:error, %{message: messages}}
+  end
+
+  defp not_found_error do
+    {:error, %{message: "Entity Not Found"}}
   end
 end
