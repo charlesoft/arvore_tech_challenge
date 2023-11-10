@@ -4,6 +4,7 @@ defmodule ArvoreTechChallengeWeb.Resolvers.Entities do
   """
 
   alias ArvoreTechChallenge.Entities
+  alias ArvoreTechChallenge.Entities.Entity
 
   def list_entities(_parent, _args, _resolution) do
     {:ok, Entities.list_entities()}
@@ -28,7 +29,7 @@ defmodule ArvoreTechChallengeWeb.Resolvers.Entities do
   end
 
   def update_entity(_parent, %{id: id} = args, _resolution) do
-    with {:ok, entity} when not is_nil(entity) <- {:ok, Entities.get_entity!(id)} do
+    with {:ok, %Entity{} = entity} <- {:ok, Entities.get_entity!(id)} do
       case Entities.update_entity(entity, args) do
         {:ok, entity} ->
           entity = Entities.get_entity(entity.id)
@@ -41,7 +42,8 @@ defmodule ArvoreTechChallengeWeb.Resolvers.Entities do
           {:error, %{message: messages}}
       end
     else
-      {:error, message: "Entity Not Found"}
+      _ ->
+        {:error, message: "Entity Not Found"}
     end
   end
 
