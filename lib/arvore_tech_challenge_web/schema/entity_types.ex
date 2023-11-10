@@ -9,4 +9,8 @@ defmodule ArvoreTechChallengeWeb.Schema.EntityTypes do
     field :inep, :string
     field :entities, list_of(:id)
   end
+
+  object :delete_message_entity do
+    field :message, :string
+  end
 end
