@@ -7,7 +7,7 @@ defmodule ArvoreTechChallenge.Repo.Migrations.CreateEntitiesTable do
       add :entity_type, :string, default: "network", null: false
       add :inep, :string
 
-      add :parent_id, references(:entities, on_delete: :nothing)
+      add :parent_id, references(:entities, on_delete: :delete_all)
 
       timestamps()
     end
