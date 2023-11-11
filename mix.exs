@@ -50,7 +50,9 @@ defmodule ArvoreTechChallenge.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:absinthe, "~> 1.7.4"},
       {:absinthe_plug, "~> 1.5.8"},
-      {:absinthe_phoenix, "~> 2.0.0"}
+      {:absinthe_phoenix, "~> 2.0.0"},
+      {:guardian, "~> 2.3.2"},
+      {:argon2_elixir, "~> 2.0"}
     ]
   end
 
