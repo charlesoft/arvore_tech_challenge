@@ -14,8 +14,12 @@ defmodule ArvoreTechChallengeWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :graphql do
+    plug ArvoreTechChallengeWeb.Context
+  end
+
   scope "/" do
-    pipe_through :api
+    pipe_through :graphql
 
     forward "/api/v2/partners/entities", Absinthe.Plug, schema: ArvoreTechChallengeWeb.Schema
 
