@@ -18,7 +18,7 @@ defmodule ArvoreTechChallenge.EntityTest do
       assert changeset.valid?
     end
 
-    test "creates and invalid changeset" do
+    test "creates an invalid changeset" do
       attrs = %{
         name: nil,
         inep: "1232322",
