@@ -49,7 +49,7 @@ config :phoenix, :json_library, Jason
 
 # Configures Guardian Authentication
 config :arvore_tech_challenge, ArvoreTechChallenge.Accounts.Guardian,
-  issuer: "cumbuca_code_challenge",
+  issuer: "arvore_tech_challenge",
   secret_key: "HcOlVGE0wFcQf4cPNg1SH4JBDI+BlxmZf6aPZXFmvb8QC9a5oLgI/RIxTGNZA+8q"
 
 # Import environment specific config. This must remain at the bottom
