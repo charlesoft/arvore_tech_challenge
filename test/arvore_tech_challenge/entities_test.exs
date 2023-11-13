@@ -136,6 +136,17 @@ defmodule ArvoreTechChallenge.EntitiesTest do
 
       assert %{parent_id: ["required for entity_type 'class'"]} = errors_on(changeset)
     end
+
+    test "returns changeset error if parent_id for entity_type 'class' is not a entity_type 'school'",
+         %{school: school} do
+      %{id: network_id} = insert!(:entity, name: "Network Example", entity_type: :network)
+      attrs = %{name: "New Class", entity_type: :class, parent_id: network_id}
+
+      {:error, changeset} = Entities.update_entity(school, attrs)
+
+      assert %{parent_id: ["parent_id for entity_type 'class' must have entity_type 'school'"]} =
+               errors_on(changeset)
+    end
   end
 
   describe "delete_entity/1" do
