@@ -7,15 +7,15 @@ defmodule ArvoreTechChallengeWeb.Schema.EntitiesTest do
 
   import ArvoreTechChallenge.Factory
 
+  setup %{conn: conn} do
+    user = insert!(:user, email: "test@example.com", password: "1234567")
+
+    {:ok, jwt, _claims} = Guardian.encode_and_sign(user)
+
+    {:ok, conn: conn, jwt: jwt}
+  end
+
   describe "entities query" do
-    setup %{conn: conn} do
-      user = insert!(:user, email: "test@example.com", password: "1234567")
-
-      {:ok, jwt, _claims} = Guardian.encode_and_sign(user)
-
-      {:ok, conn: conn, jwt: jwt}
-    end
-
     @entities_query """
     query{
       entities{
@@ -92,14 +92,6 @@ defmodule ArvoreTechChallengeWeb.Schema.EntitiesTest do
   end
 
   describe "query entity" do
-    setup %{conn: conn} do
-      user = insert!(:user, email: "test@example.com", password: "1234567")
-
-      {:ok, jwt, _claims} = Guardian.encode_and_sign(user)
-
-      {:ok, conn: conn, jwt: jwt}
-    end
-
     @entity_query """
     query($id: ID!){
       entity(id: $id){
@@ -167,14 +159,6 @@ defmodule ArvoreTechChallengeWeb.Schema.EntitiesTest do
   end
 
   describe "create entity mudation" do
-    setup %{conn: conn} do
-      user = insert!(:user, email: "test@example.com", password: "1234567")
-
-      {:ok, jwt, _claims} = Guardian.encode_and_sign(user)
-
-      {:ok, conn: conn, jwt: jwt}
-    end
-
     @create_entity_mutation """
     mutation CreateEntity($name: String!, $entity_type: String!, $inep: String, $parent_id: String){
       createEntity(name: $name, entity_type: $entity_type, inep: $inep, parent_id: $parent_id){
@@ -263,14 +247,6 @@ defmodule ArvoreTechChallengeWeb.Schema.EntitiesTest do
   end
 
   describe "update entity mutation" do
-    setup %{conn: conn} do
-      user = insert!(:user, email: "test@example.com", password: "1234567")
-
-      {:ok, jwt, _claims} = Guardian.encode_and_sign(user)
-
-      {:ok, conn: conn, jwt: jwt}
-    end
-
     @update_entity_mutation """
     mutation UpdateEntity($id: ID!, $name: String!, $entity_type: String!, $inep: String, $parent_id: String){
       updateEntity(id: $id, name: $name, entity_type: $entity_type, inep: $inep, parent_id: $parent_id){
@@ -413,14 +389,6 @@ defmodule ArvoreTechChallengeWeb.Schema.EntitiesTest do
   end
 
   describe "delete entity mutation" do
-    setup %{conn: conn} do
-      user = insert!(:user, email: "test@example.com", password: "1234567")
-
-      {:ok, jwt, _claims} = Guardian.encode_and_sign(user)
-
-      {:ok, conn: conn, jwt: jwt}
-    end
-
     @delete_entity_mutation """
     mutation DeleteEntity($id: ID!){
       deleteEntity(id: $id){
