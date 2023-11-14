@@ -10,7 +10,7 @@ Para iniciar a aplicação:
 
 Esse serviço utitliza uma API GraphQL para acessar e administrar os dados de Redes, Escolas e Turmas. Abaixo estão exemplos de como utitlizar os endpoints implementados para a manipulação desses dados.
 
-- Criar conta de usuário
+#### Criar conta de usuário
 
 Para usar esta API, é preciso criar primeiro uma conta de usuário:
 
@@ -46,7 +46,7 @@ Response:
 }
 ```
 
-- Sign In
+#### Sign In
 
 Criado um usuário, agora é preciso fazer um sign in no qual irár retornar um `accessToken`. Esse token será a chave de autenticação que deve user usada para acessar os dados da API das entidades escolares.
 
@@ -86,7 +86,7 @@ Agora com `accessToken` como chave de autenticação, é possível acessar os da
 
 Obs: O accessToken sera usado no formato `Bearer [accessToken]` nos headers ao realizar as requisições.
 
-- Acessar lista de entities
+#### Acessar lista de entities
 
 Exemplo:
 ```
@@ -135,7 +135,7 @@ Response:
 }
 ```
 
-- Buscar uma entidade
+#### Buscar uma entidade
 
 Exemplo:
 ```
@@ -177,7 +177,7 @@ Response:
 }
 ```
 
-- Criar Entidade
+#### Criar Entidade
 
 Exemplo:
 ```
@@ -222,7 +222,7 @@ Response:
 }
 ```
 
-- Atualizar entidade
+#### Atualizar entidade
 
 Exemplo:
 ```
@@ -243,6 +243,7 @@ query variables:
   "name": "Old School",
   "id": 14
 }
+````
 Response:
 ```json
 {
@@ -256,7 +257,7 @@ Response:
 }
 ```
 
-- Deletar uma entidade
+#### Deletar uma entidade
 
 Exemplo:
 ```
