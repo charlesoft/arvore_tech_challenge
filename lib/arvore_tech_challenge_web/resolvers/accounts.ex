@@ -8,6 +8,10 @@ defmodule ArvoreTechChallengeWeb.Resolvers.Accounts do
 
   import ArvoreTechChallengeWeb.ErrorHelper
 
+  def get_user(_parent, _args, %{context: %{current_user: current_user}}) do
+    {:ok, current_user}
+  end
+
   def create_user(_parent, args, _context) do
     case Accounts.create_user(args) do
       {:ok, account} ->
@@ -23,8 +27,8 @@ defmodule ArvoreTechChallengeWeb.Resolvers.Accounts do
       {:ok, token} ->
         {:ok, token}
 
-        {:error, error} ->
-          {:error, %{message: error}}
+      {:error, error} ->
+        {:error, %{message: error}}
     end
   end
 end

@@ -21,7 +21,9 @@ defmodule ArvoreTechChallengeWeb.Router do
   scope "/" do
     pipe_through :graphql
 
-    forward "/api/v2/partners/entities", Absinthe.Plug, schema: ArvoreTechChallengeWeb.Schema
+    forward "/users", ArvoreTechChallenge.UserGraphQL
+
+    forward "/api/v2/partners/entities", ArvoreTechChallenge.GraphQL
 
     forward "/graphiql", Absinthe.Plug.GraphiQL,
       schema: ArvoreTechChallengeWeb.Schema,
