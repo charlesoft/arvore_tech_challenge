@@ -6,6 +6,8 @@ defmodule ArvoreTechChallengeWeb.Resolvers.Entities do
   alias ArvoreTechChallenge.Entities
   alias ArvoreTechChallenge.Entities.Entity
 
+  import ArvoreTechChallengeWeb.ErrorHelper
+
   def list_entities(_parent, _args, _resolution) do
     {:ok, Entities.list_entities()}
   end
@@ -60,19 +62,5 @@ defmodule ArvoreTechChallengeWeb.Resolvers.Entities do
 
   defp find_entity(id) do
     Entities.get_entity(id)
-  end
-
-  defp changeset_error_messages(error) do
-    messages =
-      Enum.map(error.errors, fn error ->
-        {value, {message, _validation}} = error
-        "#{value} #{message}"
-      end)
-
-    {:error, %{message: messages}}
-  end
-
-  defp not_found_error do
-    {:error, %{message: "Entity Not Found"}}
   end
 end

@@ -6,6 +6,8 @@ defmodule ArvoreTechChallengeWeb.Resolvers.Accounts do
   alias ArvoreTechChallenge.Accounts
   alias ArvoreTechChallenge.Accounts.UserAuthenticator
 
+  import ArvoreTechChallengeWeb.ErrorHelper
+
   def create_user(_parent, args, _context) do
     case Accounts.create_user(args) do
       {:ok, account} ->
@@ -24,15 +26,5 @@ defmodule ArvoreTechChallengeWeb.Resolvers.Accounts do
         {:error, error} ->
           {:error, %{message: error}}
     end
-  end
-
-  defp changeset_error_messages(error) do
-    messages =
-      Enum.map(error.errors, fn error ->
-        {value, {message, _validation}} = error
-        "#{value} #{message}"
-      end)
-
-    {:error, %{message: messages}}
   end
 end
