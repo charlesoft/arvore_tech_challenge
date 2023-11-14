@@ -1,4 +1,7 @@
 defmodule ArvoreTechChallengeWeb.Schema do
+  @moduledoc """
+  Schema responsible for defining the Entity queries
+  """
   use Absinthe.Schema
 
   import_types(ArvoreTechChallengeWeb.Schema.EntityTypes)

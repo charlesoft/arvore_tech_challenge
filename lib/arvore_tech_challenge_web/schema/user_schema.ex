@@ -1,4 +1,7 @@
 defmodule ArvoreTechChallengeWeb.UserSchema do
+  @moduledoc """
+  Schema responsible for defining the User queries
+  """
   use Absinthe.Schema
 
   import_types(ArvoreTechChallengeWeb.Schema.UserTypes)
