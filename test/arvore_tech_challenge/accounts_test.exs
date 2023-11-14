@@ -36,5 +36,18 @@ defmodule ArvoreTechChallenge.AccountsTest do
       assert %{email: ["has invalid format"], password: ["should be at least 6 character(s)"]} =
                errors_on(changeset)
     end
+
+    test "returns a changeset error if email is not unique" do
+      insert!(:user, email: "charles@gmail.com")
+
+      attrs = %{
+        email: "charles@gmail.com",
+        password: "125656"
+      }
+
+      {:error, changeset} = Accounts.create_user(attrs)
+
+      assert %{email: ["should be unique"]} = errors_on(changeset)
+    end
   end
 end

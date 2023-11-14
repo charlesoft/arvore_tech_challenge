@@ -21,6 +21,7 @@ defmodule ArvoreTechChallenge.Accounts.User do
     |> validate_required([:email, :password])
     |> validate_length(:password, min: @password_min_size)
     |> validate_format(:email, @email_regex)
+    |> unique_constraint(:email, name: :users_email_index, message: "should be unique")
     |> put_password_hash()
   end
 
