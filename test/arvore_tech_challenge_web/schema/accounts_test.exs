@@ -2,6 +2,49 @@ defmodule ArvoreTechChallengeWeb.Schema.AccountsTest do
   use ArvoreTechChallengeWeb.ConnCase
 
   alias ArvoreTechChallenge.Accounts
+  alias ArvoreTechChallenge.Accounts.Guardian
+
+  describe "get user query" do
+    @user_query """
+    query{
+      user{
+        id
+        email
+      }
+    }
+    """
+
+    test "returns the current user by its access token", %{conn: conn} do
+      {:ok, user} = Accounts.create_user(%{email: "test@example.com", password: "1234567"})
+      {:ok, jwt, _claims} = Guardian.encode_and_sign(user)
+
+      conn =
+        conn
+        |> put_req_header("authorization", "Bearer #{jwt}")
+        |> post("/users", query: @user_query)
+
+      assert json_response(conn, 200) == %{
+               "data" => %{
+                 "user" => %{
+                   "id" => "#{user.id}",
+                   "email" => "test@example.com"
+                 }
+               }
+             }
+    end
+
+    test "returns 'unauthenticated' if given an invalid access token", %{conn: conn} do
+      invalid_token = "invalid_token"
+
+      conn =
+        conn
+        |> put_req_header("authorization", "Bearer #{invalid_token}")
+        |> post("/users", query: @user_query)
+
+      assert %{"data" => nil, "errors" => [%{"message" => "unauthenticated"}]} =
+               json_response(conn, 200)
+    end
+  end
 
   describe "user account mutation" do
     @create_user_mutation """
