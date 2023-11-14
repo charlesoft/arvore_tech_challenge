@@ -274,6 +274,7 @@ Mutation:
 query variables:
 ```json
 {"id": 41}
+```
 Response:
 ```json
 {
@@ -281,7 +282,7 @@ Response:
 }
 ```
 
-## Detalhers/Decisões de implementação
+## Detalhes/Decisões de implementação
 
 - Criei o model Entity para representar a entidade `Entity`, no qual seria a única entidade a representar os diferentes tipos dela mesma que podemos criar, como foi determinado na descrição do exercício.
   - Uma entity pode pertencer (`belongs_to`) our ter muitas (`has_many`) entidades relacionadas.
