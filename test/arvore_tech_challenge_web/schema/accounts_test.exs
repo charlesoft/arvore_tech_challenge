@@ -20,7 +20,7 @@ defmodule ArvoreTechChallengeWeb.Schema.AccountsTest do
       }
 
       conn =
-        post(conn, "/api/v2/partners/entities", query: @create_user_mutation, variables: variables)
+        post(conn, "/users", query: @create_user_mutation, variables: variables)
 
       assert %{
                "data" => %{
@@ -41,7 +41,7 @@ defmodule ArvoreTechChallengeWeb.Schema.AccountsTest do
       }
 
       conn =
-        post(conn, "/api/v2/partners/entities", query: @create_user_mutation, variables: variables)
+        post(conn, "/users", query: @create_user_mutation, variables: variables)
 
       assert %{
                "data" => %{"createUser" => nil},
@@ -75,7 +75,7 @@ defmodule ArvoreTechChallengeWeb.Schema.AccountsTest do
       }
 
       conn =
-        post(conn, "/api/v2/partners/entities", query: @sign_in_mutation, variables: variables)
+        post(conn, "/users", query: @sign_in_mutation, variables: variables)
 
       %{
         "data" => %{
@@ -97,7 +97,7 @@ defmodule ArvoreTechChallengeWeb.Schema.AccountsTest do
       }
 
       conn =
-        post(conn, "/api/v2/partners/entities", query: @sign_in_mutation, variables: variables)
+        post(conn, "/users", query: @sign_in_mutation, variables: variables)
 
       assert %{
                "data" => %{"signIn" => nil},

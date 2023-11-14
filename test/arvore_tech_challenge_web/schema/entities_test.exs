@@ -165,7 +165,7 @@ defmodule ArvoreTechChallengeWeb.Schema.EntitiesTest do
         id
         name
         parent_id: parentId
-        entity_type: entity_type
+        entity_type: entityType
         inep
         subtree_ids: entities
       }

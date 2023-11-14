@@ -12,8 +12,8 @@ defmodule ArvoreTechChallengeWeb.Context do
 
   def call(conn, _) do
     case build_context(conn) do
-      {:ok, context} ->
-        put_private(conn, :absinthe, %{context: %{current_user: context}})
+      {:ok, current_user} ->
+        put_private(conn, :absinthe, %{context: %{current_user: current_user}})
 
       _ ->
         conn
