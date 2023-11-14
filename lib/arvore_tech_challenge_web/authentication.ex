@@ -9,7 +9,7 @@ defmodule ArvoreTechChallengeWeb.Authentication do
       %{current_user: _} ->
         resolution
 
-       _ ->
+      _ ->
         Absinthe.Resolution.put_result(resolution, {:error, "unauthenticated"})
     end
   end
