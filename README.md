@@ -6,6 +6,35 @@ Para iniciar a aplicação:
   * Crie o banco e rode as migraçoes como comando `mix ecto.setup`
   * Para iniciar a aplicação use `mix phx.server` ou `iex -S mix phx.server` para user o terminal IEx.
 
+## Estrutura do código
+- Models
+  - Entity: reprenseta uma entidade seja um Rede, Escola ou Turma
+  - User: usuário da aplicação
+
+- Context Modules
+  - Entities: responsável por manipular dados das entidades
+  - Accounts: responsável por manipular dados dos usuários
+
+- GraphQL Schemas
+  - Schema
+    - Módulo que contém as queries e mutations para acessar a API de entidades
+  - UserSchema
+    - Módulo que contém as queries e mutations para acessar a API de usuários, no caso para criar um usuários ou fazer o sign in.
+
+- Resolvers
+  - Entities: responsável por lidar comas queries e mutations de dados das entitdades
+  - Accounts: responsável responsável por lidar com as queries e mutations de dados de usuários
+
+- Middleware
+  - Authentication: responsável por fazer a autenticação do usuário via `access_token`
+
+- Absinthe Context
+  - Context: responsável por por construir map `context` que é usado pela arquitetura do Absinthe para autenticação
+
+- Routes/Endpoints
+  - /api/v2/partners/entities: utilizada para as queries de entidades
+  - /users: utilizada para as queries de usuários
+
 ## Uso
 
 Esse serviço utitliza uma API GraphQL para acessar e administrar os dados de Redes, Escolas e Turmas. Abaixo estão exemplos de como utitlizar os endpoints implementados para a manipulação desses dados.
