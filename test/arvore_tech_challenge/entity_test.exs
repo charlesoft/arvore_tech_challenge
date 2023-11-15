@@ -66,7 +66,7 @@ defmodule ArvoreTechChallenge.EntityTest do
 
       refute changeset.valid?
 
-      assert %{parent_id: ["parent_id for entity_type 'school' must have entity_type 'network'"]} =
+      assert %{parent_id: ["for entity_type 'school' must have entity_type 'network'"]} =
                errors_on(changeset)
     end
 

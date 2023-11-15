@@ -155,7 +155,7 @@ defmodule ArvoreTechChallenge.EntitiesTest do
 
       {:error, changeset} = Entities.update_entity(school, attrs)
 
-      assert %{parent_id: ["parent_id for entity_type 'class' must have entity_type 'school'"]} =
+      assert %{parent_id: ["for entity_type 'class' must have entity_type 'school'"]} =
                errors_on(changeset)
     end
 

@@ -51,8 +51,10 @@ defmodule ArvoreTechChallenge.Entities.Entity do
       add_error(
         changeset,
         :parent_id,
-        "parent_id for entity_type 'class' must have entity_type 'school'"
+        "for entity_type 'class' must have entity_type 'school'"
       )
+    else
+      changeset
     end
   end
 
@@ -63,8 +65,10 @@ defmodule ArvoreTechChallenge.Entities.Entity do
       add_error(
         changeset,
         :parent_id,
-        "parent_id for entity_type '#{entity_type}' must have entity_type 'network'"
+        "for entity_type '#{entity_type}' must have entity_type 'network'"
       )
+    else
+      changeset
     end
   end
 
