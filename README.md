@@ -8,7 +8,7 @@ Para iniciar a aplicação:
 
 ## Estrutura do código
 - Models
-  - Entity: reprenseta uma entidade seja um Rede, Escola ou Turma
+  - Entity: representa uma entidade seja um Rede, Escola ou Turma
   - User: usuário da aplicação
 
 - Context Modules
