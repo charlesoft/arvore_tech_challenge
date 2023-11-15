@@ -24,7 +24,7 @@ defmodule ArvoreTechChallengeWeb.Resolvers.Entities do
         {:ok, entity}
 
       {:error, error} ->
-        changeset_error_messages(error)
+        error_messages(error)
     end
   end
 
@@ -37,7 +37,7 @@ defmodule ArvoreTechChallengeWeb.Resolvers.Entities do
           {:ok, entity}
 
         {:error, error} ->
-          changeset_error_messages(error)
+          error_messages(error)
       end
     else
       _ ->
@@ -52,7 +52,7 @@ defmodule ArvoreTechChallengeWeb.Resolvers.Entities do
           {:ok, %{message: "Entity and its children deleted with success."}}
 
         {:error, error} ->
-          changeset_error_messages(error)
+          error_messages(error)
       end
     else
       _ ->

@@ -3,14 +3,18 @@ defmodule ArvoreTechChallengeWeb.ErrorHelper do
   Module responsible for defining helpers to build error messages
   """
 
-  def changeset_error_messages(error) do
+  def error_messages(%{errors: errors}) do
     messages =
-      Enum.map(error.errors, fn error ->
+      Enum.map(errors, fn error ->
         {value, {message, _validation}} = error
         "#{value} #{message}"
       end)
 
     {:error, %{message: messages}}
+  end
+
+  def error_messages(error) do
+    {:error, %{message: error}}
   end
 
   def not_found_error do

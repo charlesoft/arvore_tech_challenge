@@ -18,7 +18,7 @@ defmodule ArvoreTechChallengeWeb.Resolvers.Accounts do
         {:ok, account}
 
       {:error, error} ->
-        changeset_error_messages(error)
+        error_messages(error)
     end
   end
 
