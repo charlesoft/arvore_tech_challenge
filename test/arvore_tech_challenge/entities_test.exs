@@ -112,6 +112,17 @@ defmodule ArvoreTechChallenge.EntitiesTest do
 
       assert %{parent_id: ["required for entity_type 'class'"]} = errors_on(changeset)
     end
+
+    test "returns an error if parent_id does not exist" do
+      attrs = %{
+        name: "Class Example",
+        entity_type: :class,
+        inep: nil,
+        parent_id: 1
+      }
+
+      assert {:error, "invalid parent_id"} = Entities.create_entity(attrs)
+    end
   end
 
   describe "update_entity/2" do
@@ -146,6 +157,12 @@ defmodule ArvoreTechChallenge.EntitiesTest do
 
       assert %{parent_id: ["parent_id for entity_type 'class' must have entity_type 'school'"]} =
                errors_on(changeset)
+    end
+
+    test "returns an error if parent_id does not exist", %{school: school} do
+      attrs = %{name: "Old School", parent_id: 1}
+
+      assert {:error, "invalid parent_id"} = Entities.update_entity(school, attrs)
     end
   end
 

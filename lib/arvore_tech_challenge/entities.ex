@@ -31,20 +31,37 @@ defmodule ArvoreTechChallenge.Entities do
   end
 
   def create_entity(attrs) do
-    %Entity{}
-    |> Entity.changeset(attrs)
-    |> Repo.insert()
+    parent_id = Map.get(attrs, :parent_id)
+
+    with :ok <- ensure_valid_parent_id(parent_id) do
+      %Entity{}
+      |> Entity.changeset(attrs)
+      |> Repo.insert()
+    end
   end
 
   def update_entity(entity, attrs) do
+    parent_id = Map.get(attrs, :parent_id)
     attrs = Map.delete(attrs, :id)
 
-    entity
-    |> Entity.changeset(attrs)
-    |> Repo.update()
+    with :ok <- ensure_valid_parent_id(parent_id) do
+      entity
+      |> Entity.changeset(attrs)
+      |> Repo.update()
+    end
   end
 
   def delete_entity(entity) do
     Repo.delete(entity)
+  end
+
+  defp ensure_valid_parent_id(nil), do: :ok
+
+  defp ensure_valid_parent_id(parent_id) do
+    if Repo.get(Entity, parent_id) do
+      :ok
+    else
+      {:error, "invalid parent_id"}
+    end
   end
 end
