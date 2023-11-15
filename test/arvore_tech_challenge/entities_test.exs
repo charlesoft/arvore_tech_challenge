@@ -127,17 +127,21 @@ defmodule ArvoreTechChallenge.EntitiesTest do
 
   describe "update_entity/2" do
     setup do
-      school = insert!(:entity, name: "School Example", entity_type: :school)
+      network = insert!(:entity, name: "Network Example", entity_type: :network)
+
+      school =
+        insert!(:entity, name: "School Example", entity_type: :school, parent_id: network.id)
+
       class = insert!(:entity, name: "Class Example", entity_type: :class, parent_id: school.id)
 
       {:ok, school: school, class: class}
     end
 
-    test "updates an entity", %{school: %{id: school_id}, class: %{id: class_id} = class} do
-      attrs = %{name: "Old Class"}
+    test "updates an entity", %{school: %{id: school_id} = school} do
+      attrs = %{name: "Old School", parent_id: nil}
 
-      {:ok, %Entity{id: ^class_id, name: "Old Class", parent_id: ^school_id}} =
-        Entities.update_entity(class, attrs)
+      {:ok, %Entity{id: ^school_id, name: "Old School", parent_id: nil}} =
+        Entities.update_entity(school, attrs)
     end
 
     test "returns a changeset error if there are invalid attrs", %{class: class} do

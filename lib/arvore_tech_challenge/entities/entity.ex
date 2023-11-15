@@ -44,6 +44,10 @@ defmodule ArvoreTechChallenge.Entities.Entity do
     add_error(changeset, :parent_id, "required for entity_type 'class'")
   end
 
+  defp validate_presence_of_parent_id(%Ecto.Changeset{changes: %{parent_id: nil}} = changeset) do
+    changeset
+  end
+
   defp validate_presence_of_parent_id(
          %Ecto.Changeset{changes: %{parent_id: parent_id, entity_type: :class}} = changeset
        ) do
