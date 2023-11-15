@@ -248,7 +248,7 @@ defmodule ArvoreTechChallengeWeb.Schema.EntitiesTest do
 
   describe "update entity mutation" do
     @update_entity_mutation """
-    mutation UpdateEntity($id: ID!, $name: String!, $entity_type: String!, $inep: String, $parent_id: String){
+    mutation UpdateEntity($id: ID!, $name: String!, $entity_type: String!, $inep: String, $parent_id: ID){
       updateEntity(id: $id, name: $name, entity_type: $entity_type, inep: $inep, parent_id: $parent_id){
         id
         name

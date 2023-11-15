@@ -43,7 +43,7 @@ defmodule ArvoreTechChallengeWeb.Schema do
       arg(:name, :string)
       arg(:entity_type, :string)
       arg(:inep, :string)
-      arg(:parent_id, :string)
+      arg(:parent_id, :id)
 
       middleware(Authentication)
       resolve(&Resolvers.Entities.update_entity/3)

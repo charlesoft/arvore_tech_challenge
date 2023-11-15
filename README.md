@@ -214,7 +214,7 @@ POST http://localhost:4000/api/v2/partners/entities
 ```
 Mutation:
 ```graphql
-mutation CreateEntity($name: String!, $entity_type: String!, $inep: String, $parent_id: String){
+mutation CreateEntity($name: String!, $entity_type: String!, $inep: String, $parentId: ID){
   createEntity(name: $name, entity_type: $entity_type, inep: $inep, parent_id: $parent_id){
     id
     name
